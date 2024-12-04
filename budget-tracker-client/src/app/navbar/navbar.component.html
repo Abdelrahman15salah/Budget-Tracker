@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <ul>
+    <!-- Show Register and Login links if the user is not logged in -->
+    <li *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+
+    <!-- Show the following links if the user is logged in -->
+    <li *ngIf="isLoggedIn"><a routerLink="/dashboard">Dashboard</a></li>
+
+    <!-- Show Sign Out link if the user is logged in -->
+    <li *ngIf="isLoggedIn"><a (click)="signOut()">Sign Out</a></li>
+  </ul>
+</nav>

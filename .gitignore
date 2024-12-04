@@ -1,0 +1,21 @@
+# Node.js dependencies
+node_modules/
+
+# Build files
+/dist
+/build
+/.angular
+/.next
+/.out
+/.idea
+/.vscode
+
+# Environment configuration files
+.env
+
+# Log files
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
