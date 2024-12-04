@@ -1,4 +1,4 @@
-// models/Budget.js
+
 const mongoose = require('mongoose');
 
 const budgetSchema = new mongoose.Schema({
@@ -9,7 +9,7 @@ const budgetSchema = new mongoose.Schema({
     {
       category: { type: String, required: true },
       limit: { type: Number, required: true },
-      spent: { type: Number, default: 0 }, // Track how much has been spent
+      spent: { type: Number, default: 0 }, 
     },
   ],
 });

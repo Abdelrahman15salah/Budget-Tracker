@@ -18,22 +18,18 @@ export class ExpenseService {
       'Authorization': `Bearer ${token}`
     });
   }
-  // Fetch expenses
   getExpenses(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/expenses/`, {headers: this.getAuthHeaders()});
   }
 
-  // Add new expense
   addExpense(expense: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/expenses/add`, expense, {headers: this.getAuthHeaders()});
   }
 
-  // Delete expense by id
   deleteExpense(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/expenses/delete/${id}`, {headers: this.getAuthHeaders()});
   }
 
-  // Edit expense
   editExpense(id: string, expense: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/expenses/edit/${id}`, expense, {headers: this.getAuthHeaders()});
   }

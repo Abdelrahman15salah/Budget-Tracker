@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';  // Make sure to import your AuthService
+import { AuthService } from '../auth.service'; 
 
 @Component({
   selector: 'app-navbar',
@@ -17,16 +17,16 @@ export class NavbarComponent implements OnInit {
     this.checkLoginStatus();
   }
 
-  // Check if the user is logged in (by checking the token in local storage)
+  
   checkLoginStatus() {
     const token = localStorage.getItem('token');
-    this.isLoggedIn = !!token;  // If token exists, user is logged in
+    this.isLoggedIn = !!token;  
   }
 
   // Sign out the user
   signOut() {
-    this.authService.logout();  // Clear the authentication data
-    this.isLoggedIn = false;  // Update the local state
-    this.router.navigate(['/login']);  // Redirect to login page after logout
+    this.authService.logout(); 
+    this.isLoggedIn = false; 
+    this.router.navigate(['/login']);  
   }
 }

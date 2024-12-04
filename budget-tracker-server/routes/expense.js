@@ -3,7 +3,6 @@ const Expense = require('../models/Expense');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-// Middleware to verify JWT token
 const authenticate = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
@@ -19,7 +18,6 @@ const authenticate = (req, res, next) => {
   }
 };
 
-// Add a new expense
 router.post('/add', authenticate, async (req, res) => {
   const { category, amount, description } = req.body;
 
@@ -43,7 +41,6 @@ router.post('/add', authenticate, async (req, res) => {
   }
 });
 
-// Get expenses by user
 router.get('/', authenticate, async (req, res) => {
   try {
     const expenses = await Expense.find({ userId: req.userId });
@@ -68,11 +65,9 @@ router.put('/edit/:id', authenticate, async (req, res) => {
       return res.status(404).json({ message: 'Expense not found' });
     }
 
-    // Update the fields
     if (category) expense.category = category;
     if (amount) expense.amount = amount;
     if (description) expense.description = description;
-
     // Save the updated expense
     const updatedExpense = await expense.save();
     res.json({ message: 'Expense updated successfully', expense: updatedExpense });
@@ -90,15 +85,12 @@ router.delete('/delete/:id', async (req, res) => {
   try {
     const expenseId = req.params.id; // Get the expense ID from the request URL
 
-    // Find the expense by ID and delete it
     const deletedExpense = await Expense.findByIdAndDelete(expenseId);
 
-    // If no expense found with that ID, return 404
     if (!deletedExpense) {
       return res.status(404).json({ message: 'Expense not found' });
     }
 
-    // Return success message
     res.status(200).json({ message: 'Expense deleted successfully' });
   } catch (error) {
     console.error(error);

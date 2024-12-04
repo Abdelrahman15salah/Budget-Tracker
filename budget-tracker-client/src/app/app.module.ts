@@ -27,16 +27,16 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppRoutingModule,
     HttpClientModule ,
     
-    FormsModule // Import HttpClientModule here
+    FormsModule 
   ],
-  providers: [DashboardService,JwtHelperService,  // Add JwtHelperService to providers
+  providers: [DashboardService,JwtHelperService,  
     {
       provide: JWT_OPTIONS,
       useValue: {
-        tokenGetter: () => localStorage.getItem('token')  // Set the token getter function
+        tokenGetter: () => localStorage.getItem('token')  
       }
     },
-    provideHttpClient()  // Use provideHttpClient to configure the HTTP client
+    provideHttpClient()  
   ],
   bootstrap: [AppComponent]
 })

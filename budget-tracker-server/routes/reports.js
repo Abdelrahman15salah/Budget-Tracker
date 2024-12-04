@@ -6,7 +6,6 @@ const Goal = require('../models/Goal');
 const mongoose = require('mongoose');
 const  verifyToken   = require('../middleware/auth');
 
-// GET report - Income vs Expenses and Goal Progress
 router.get('/generate', verifyToken , async (req, res) => {
     try {
         const userId = req.user.userId;
@@ -22,16 +21,13 @@ router.get('/generate', verifyToken , async (req, res) => {
             { $group: { _id: null, totalIncome: { $sum: '$amount' } } }
         ]);
 
-        // Fetching total expenses for the user
         const totalExpenses = await Expense.aggregate([
             { $match: { userId: new mongoose.Types.ObjectId(userId) } },
             { $group: { _id: null, totalExpenses: { $sum: '$amount' } } }
         ]);
 
-        // Fetching all goals for the user
         const goals = await Goal.find({ userId: userId });
 
-        // Calculate the progress for each goal
         const goalProgress = goals.map(goal => {
             const savedAmount = goal.savedAmount || 0;
             const progress = (savedAmount / goal.targetAmount) * 100;
@@ -43,7 +39,6 @@ router.get('/generate', verifyToken , async (req, res) => {
             };
         });
 
-        // Response format
         const report = {
             totalIncome: totalIncome[0] ? totalIncome[0].totalIncome : 0,
             totalExpenses: totalExpenses[0] ? totalExpenses[0].totalExpenses : 0,

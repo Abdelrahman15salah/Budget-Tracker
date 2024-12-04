@@ -1,4 +1,4 @@
-// auth.guard.ts
+
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -7,7 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service'; // Import AuthService
+import { AuthService } from './auth.service'; 
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +20,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isAuthenticated()) {
-      return true; // User is authenticated, allow route access
+      return true; 
     } else {
       alert('You need to log in first.');
-      this.router.navigate(['/login']); // Redirect to login page
-      return false; // Prevent route access
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }

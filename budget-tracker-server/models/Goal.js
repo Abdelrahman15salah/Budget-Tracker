@@ -5,7 +5,7 @@ const GoalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  }, // Reference to the User
+  }, 
   name: {
     type: String,
     required: true,
@@ -16,7 +16,7 @@ const GoalSchema = new mongoose.Schema({
   },
   currentAmount: {
     type: Number,
-    default: 0, // Tracks how much has been saved toward the goal
+    default: 0, 
   },
   deadline: {
     type: Date,

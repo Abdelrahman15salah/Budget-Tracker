@@ -17,9 +17,9 @@ export class DashboardComponent implements OnInit {
   isLoading: boolean = false;
   hasExpenses: boolean = false;
   errorMessage: string = '';
-  successMessage: string = '';  // Success message for user feedback
+  successMessage: string = '';  
 
-  // Data binding for creating/editing
+
   newExpense: any = { category: '', amount: 0, description: '' };
   newIncome: any = { source: '', amount: 0 };
   newSavingsGoal: any = { goalName: '', targetAmount: 0 };
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
     this.getSavingsGoal();
   }
 
-  // Fetch financial data (income, savings goal)
+
   getFinancialData(): void {
     this.isLoading = true;
     this.dashboardService.getDashboardData().subscribe(
@@ -53,8 +53,6 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
-  // Fetch the expenses data
   getExpenses(): void {
     this.isLoading = true;
     const token = localStorage.getItem('token');
@@ -83,12 +81,12 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // Fetch income data
+
   getIncome(): void {
     this.dashboardService.getIncome().subscribe(
       (data: any[]) => {
-        console.log('Income data fetched:', data);  // Log the fetched data
-        this.income = data;  // Update the income property
+        console.log('Income data fetched:', data);  
+        this.income = data; 
       },
       (error) => {
         console.error('Error fetching income', error);
@@ -113,11 +111,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // Add new expense
+
   addExpense(): void {
     this.expenseService.addExpense(this.newExpense).subscribe(
       () => {
-        this.getExpenses();  // Refresh expenses
+        this.getExpenses();  
         this.successMessage = 'Expense added successfully!';
         this.newExpense = { category: '', amount: 0, description: '' };
       },
@@ -128,15 +126,15 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // Add new income
+
   addIncome(): void {
     this.dashboardService.addIncome(this.newIncome).subscribe(
       () => {
-        this.getIncome();  // Refresh income after adding new income
+        this.getIncome();  
         this.successMessage = 'Income added successfully!';
         console.log('New Income:', this.newIncome);
         
-        this.newIncome = { source: '', amount: 0 };  // Reset the form fields
+        this.newIncome = { source: '', amount: 0 };  
       },
       (error) => {
         console.error('Error adding income', error);
@@ -147,11 +145,11 @@ export class DashboardComponent implements OnInit {
   
   
 
-  // Add new savings goal
+ 
   addSavingsGoal(): void {
     this.dashboardService.addSavingsGoal(this.newSavingsGoal).subscribe(
       () => {
-        this.getSavingsGoal();  // Refresh savings goal
+        this.getSavingsGoal();  
         this.successMessage = 'Savings goal added successfully!';
         this.newSavingsGoal = { goalName: '', targetAmount: 0 };
       },
@@ -166,7 +164,7 @@ export class DashboardComponent implements OnInit {
   deleteExpense(id: string): void {
     this.expenseService.deleteExpense(id).subscribe(
       () => {
-        this.getExpenses();  // Refresh expenses
+        this.getExpenses();  
         this.successMessage = 'Expense deleted successfully!';
       },
       (error) => {
@@ -180,7 +178,7 @@ export class DashboardComponent implements OnInit {
   deleteIncome(incomeId: string): void {
     this.dashboardService.deleteIncome(incomeId).subscribe(
       () => {
-        this.getIncome();  // Refresh the income list
+        this.getIncome();  
         this.successMessage = 'Income deleted successfully!';
       },
       (error) => {
@@ -190,11 +188,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // Delete savings goal
+
   deleteSavingsGoal(id: string): void {
     this.dashboardService.deleteSavingsGoal(id).subscribe(
       () => {
-        this.getSavingsGoal();  // Refresh savings goal
+        this.getSavingsGoal();  
         this.successMessage = 'Savings goal deleted successfully!';
       },
       (error) => {
@@ -204,7 +202,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // Generate a report
+ 
   generateReport(): void {
     this.dashboardService.generateReport().subscribe(
       (data) => {

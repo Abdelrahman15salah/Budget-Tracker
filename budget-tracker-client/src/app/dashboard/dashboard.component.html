@@ -4,9 +4,7 @@
   <div class="overview">
     <h3>Financial Overview</h3>
 
-    <!-- Financial data charts with conditions to check if data is available -->
     <div class="charts">
-      <!-- Income Chart -->
       <div class="chart">
         <h4>Income</h4>
         <div *ngIf="income === undefined || income.length === 0">
@@ -22,14 +20,12 @@
             </li>
           </ul>
 
-          <!-- Display total income -->
           <div class="total-income">
             <strong>Total Income: </strong> ₤ {{ totalIncome }}
           </div>
         </div>
       </div>
 
-      <!-- Expenses Chart -->
       <div class="chart">
         <h4>Expenses</h4>
         <div *ngIf="expenses === undefined; else expenseList">
@@ -50,7 +46,6 @@
         </ng-template>
       </div>
 
-      <!-- Savings Goal Chart -->
       <div class="chart">
         <h4>Savings Goal</h4>
         <p *ngIf="savingsGoal !== undefined; else loadingGoal">
@@ -66,7 +61,6 @@
   <div class="actions">
     <h3>Add New Data</h3>
 
-    <!-- Add Expense Form -->
     <form (ngSubmit)="addExpense()">
       <label for="category">Category</label>
       <input
@@ -92,7 +86,6 @@
       <button type="submit">Add Expense</button>
     </form>
 
-    <!-- Add Income Form -->
     <form (ngSubmit)="addIncome()">
       <label for="source">Income Source:</label>
       <input
@@ -113,7 +106,6 @@
       <button type="submit">Add Income</button>
     </form>
 
-    <!-- Add Savings Goal Form -->
     <form (ngSubmit)="addSavingsGoal()">
       <label for="goalName">Goal Name</label>
       <input
@@ -133,7 +125,6 @@
     </form>
   </div>
 
-  <!-- Report Generation Section -->
   <section>
     <h3>Generate Financial Report</h3>
     <button (click)="generateReport()">Generate Report</button>

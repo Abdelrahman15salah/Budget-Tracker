@@ -1,6 +1,6 @@
-// login.component.ts
+
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service'; // Import AuthService
+import { AuthService } from '../auth.service'; 
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,22 +18,22 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    console.log('Login attempt with:', this.user); // Debug log for user input
+    console.log('Login attempt with:', this.user); 
 
     this.authService.login(this.user).subscribe(
       (response: any) => {
-        console.log('Response from login:', response); // Debug log for response
+        console.log('Response from login:', response); 
 
         if (response.token) {
-          localStorage.setItem('token', response.token); // Save token
+          localStorage.setItem('token', response.token); 
           alert('Login successful!');
-          this.router.navigate(['/dashboard']); // Redirect to dashboard
+          this.router.navigate(['/dashboard']);
         } else {
           alert('Login failed: Token missing in response');
         }
       },
       (error) => {
-        console.error('Login error:', error); // Log error details
+        console.error('Login error:', error); 
         alert('Login failed: ' + (error.error.message || 'An error occurred'));
       }
     );

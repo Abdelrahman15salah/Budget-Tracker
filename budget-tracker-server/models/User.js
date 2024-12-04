@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// User Schema
+
 const userSchema = new mongoose.Schema({
     name: {
     type: String,
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // Add the new fields
+
   income: {
     type: Number,
     default: 6969,
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 6969,
   },
-  // Other fields like profile data, etc.
+ 
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -23,7 +23,7 @@ export class RegisterComponent {
       .subscribe(
         response => {
           alert('Registration successful!');
-          this.router.navigate(['/login']);  // Redirect to login page after successful registration
+          this.router.navigate(['/login']);  
         },
         error => {
           alert('Registration failed: ' + error.error.message);
