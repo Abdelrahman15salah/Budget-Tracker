@@ -1,0 +1,76 @@
+/* Navbar Styling */
+.navbar {
+  background-color: #2c3e50;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin-right: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #ecf0f1;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #3498db;
+}
+
+.navbar .sign-out {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.navbar .sign-out:hover {
+  color: #c0392b;
+}
+
+.navbar a:active {
+  color: #2980b9;
+}
+
+/* Flexbox for right-aligning sign out */
+.navbar .nav-links {
+  display: flex;
+  justify-content: flex-start; /* Align links to the left */
+  flex-grow: 1; /* Allow other items to take up space */
+}
+
+.navbar .sign-out-container {
+  display: flex;
+  justify-content: flex-end; /* Align sign out to the right */
+  margin-left: auto;
+  cursor: pointer;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar li {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}

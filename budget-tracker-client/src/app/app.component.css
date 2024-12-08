@@ -1,0 +1,42 @@
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #F1F8E9, #81C784);
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h2, h3, h4 {
+  color: #1A237E;
+}
+
+button {
+  background: linear-gradient(45deg, #FF4081, #FF80AB);
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #FF80AB, #FF4081);
+  transform: scale(1.05);
+}
+
+a {
+  color: #1A237E;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #FF4081;
+  text-decoration: underline;
+} */
