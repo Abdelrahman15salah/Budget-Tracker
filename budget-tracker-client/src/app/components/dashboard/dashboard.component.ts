@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { ExpenseService } from '../../services/expense.service';
 import { Router } from '@angular/router';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,13 +12,15 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   income: { source: string; amount: number }[] = [];
   expenses: { category: string; amount: number }[] = [];
-  savingsGoal: number = 0;
-  totalSavings: number = 0;
+  savingsGoals: { name: string; targetAmount: number; currentAmount: number }[] = [];
   report: any = null;
+  savingsGoal: number = 0;
+  totalIncome: number = 0;
+  totalExpenses: number = 0;
+  savingsGoalProgress: number = 0;  // Change to a single value
 
   incomeChartData: any;
   expenseChartData: any;
-  savingsGoalProgress: number = 0;
 
   chartOptions = {
     plugins: {
@@ -31,7 +33,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private expenseService: ExpenseService
+    private expenseService: ExpenseService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -45,12 +48,19 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getIncome().subscribe(
       (data: any[]) => {
         this.income = data;
+        this.calculateTotalIncome();
         this.prepareIncomeChart();
       },
       (error) => {
         console.error('Error fetching income', error);
       }
     );
+  }
+
+  // Calculate the total income
+  calculateTotalIncome(): void {
+    this.totalIncome = this.income.reduce((sum, incomeItem) => sum + incomeItem.amount, 0);
+    this.calculateSavingsProgress();  // Recalculate progress whenever income changes
   }
 
   prepareIncomeChart(): void {
@@ -73,12 +83,19 @@ export class DashboardComponent implements OnInit {
     this.expenseService.getExpenses().subscribe(
       (data: any[]) => {
         this.expenses = data;
+        this.calculateTotalExpenses();
         this.prepareExpenseChart();
       },
       (error) => {
         console.error('Error fetching expenses', error);
       }
     );
+  }
+
+  // Calculate the total expenses
+  calculateTotalExpenses(): void {
+    this.totalExpenses = this.expenses.reduce((sum, expense) => sum + expense.amount, 0);
+    this.calculateSavingsProgress();  // Recalculate progress whenever expenses change
   }
 
   prepareExpenseChart(): void {
@@ -96,28 +113,43 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  // Fetch savings goal and calculate progress
+  // Fetch savings goals and calculate progress
   getSavingsGoal(): void {
     this.dashboardService.getSavingsGoal().subscribe(
-      (data: any) => {
-        this.savingsGoal = data.targetAmount || 0;
-        this.totalSavings = data.currentSavings || 0;
-        this.calculateSavingsProgress();
+      (data: any[]) => {
+        console.log('Fetched Savings Goal Data:', data);
+        if (data && data.length > 0) {
+          const firstGoal = data[0];
+          this.savingsGoal = firstGoal.targetAmount ?? 0;
+          this.calculateSavingsProgress();
+          console.log('Updated Savings Goal:', this.savingsGoal); // Debugging line
+        } else {
+          this.savingsGoal = 0;
+          this.calculateSavingsProgress();
+          console.log('No Savings Goal Set'); // Debugging line
+        }
       },
       (error) => {
         console.error('Error fetching savings goal', error);
       }
     );
   }
-
+  
+  // Calculate savings progress as a percentage
   calculateSavingsProgress(): void {
     if (this.savingsGoal > 0) {
-      this.savingsGoalProgress = (this.totalSavings / this.savingsGoal) * 100;
+      const availableSavings = this.totalIncome - this.totalExpenses;  // Calculate savings from income and expenses
+      const progressPercentage = Math.min((availableSavings / this.savingsGoal) * 100, 100); // Ensure the progress is capped at 100%
+      this.savingsGoalProgress = progressPercentage;
+      console.log('Savings Goal Progress:', this.savingsGoalProgress); // Debugging line
     } else {
-      this.savingsGoalProgress = 0;
+      this.savingsGoalProgress = 0; // If no goal, set progress to 0
+      console.log('No Savings Goal Set'); // Debugging line
     }
+    this.savingsGoalProgress = 50;  // Set this for testing
+    this.cdr.detectChanges();  
+    // Trigger change detection manually
   }
-
   // Generate report
   generateReport(): void {
     this.dashboardService.generateReport().subscribe(

@@ -1,45 +1,162 @@
+/* Overall container styles */
 .dashboard-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f6f9fc, #e9f1f7);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-h2, h3, h4 {
+/* Title styles */
+h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #2c3e50;
   text-align: center;
-  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Financial overview section styles */
+.overview {
+  margin-top: 40px;
+}
+
+h3 {
+  font-size: 2.2rem;
+  color: #34495e;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 .charts {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  margin-top: 20px;
 }
 
+/* Individual chart block styles */
 .chart {
-  flex: 1 1 calc(33.33% - 20px);
-  margin: 10px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 380px;
+  margin-bottom: 30px;
+}
+
+.chart:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .chart h4 {
-  margin-bottom: 10px;
+  font-size: 1.7rem;
+  color: #2980b9;
+  margin-bottom: 15px;
 }
 
-p-progressBar {
-  width: 100%;
-  height: 30px;
+.chart p {
+  color: #7f8c8d;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-button {
-  margin: 10px 0;
-  padding: 10px 20px;
-  background-color: #007bff;
+/* Responsive design for charts */
+@media (max-width: 768px) {
+  .charts {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Report Section styles */
+.report-section {
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.report-section h3 {
+  font-size: 2rem;
+  color: #34495e;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.report-section button {
+  margin-top: 15px;
+  background-color: #3498db;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  padding: 12px 25px;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.report-section button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+.report-summary {
+  margin-top: 25px;
+  background-color: #f4f6f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.report-summary pre {
+  background-color: #e3f2fd;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #2c3e50;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Progress bar styles */
+p-progressBar {
+  height: 12px;
+  border-radius: 20px;
+  margin-top: 15px;
+  background-color: #ecf0f1;
+}
+
+p-progressBar .p-progress-bar-value {
+  border-radius: 20px;
+  background-color: #2980b9;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Tooltip for charts */
+.p-tooltip {
+  background-color: #2980b9;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+/* Add animations for charts */
+p-chart {
+  transition: transform 0.5s ease-in-out;
+}
+
+p-chart:hover {
+  transform: scale(1.05);
 }

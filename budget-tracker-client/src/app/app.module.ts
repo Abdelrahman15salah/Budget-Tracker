@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule ,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { GoalsComponent } from './components/goals/goals.component';
 import { IncomeComponent } from './components/income/income.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
+import { ChartModule } from 'primeng/chart';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ButtonModule } from 'primeng/button';
+
 // import { BudgetComponent } from './budget/budget.component'; 
 
 @NgModule({
@@ -31,10 +35,13 @@ import { ExpensesComponent } from './components/expenses/expenses.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule ,
+    HttpClientModule , ChartModule,
+    ProgressBarModule,
+    ButtonModule,
     
     FormsModule 
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [DashboardService,JwtHelperService,  
     {
       provide: JWT_OPTIONS,

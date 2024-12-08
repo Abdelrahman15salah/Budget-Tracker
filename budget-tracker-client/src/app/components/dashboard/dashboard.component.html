@@ -28,22 +28,29 @@
       </div>
 
       <div class="chart">
-        <h4>Savings Goal</h4>
+        <h4>Savings Goal Progress</h4>
+        <!-- Only show progress bar if savings goal progress is available -->
         <p-progressBar
           [value]="savingsGoalProgress"
-          *ngIf="savingsGoal > 0"
+          [max]="100"
+          *ngIf="savingsGoalProgress > 0"
         ></p-progressBar>
-        <p *ngIf="savingsGoal === 0">No savings goal set.</p>
+        <p *ngIf="savingsGoalProgress === 0">
+          No savings goal set or no progress made.
+        </p>
       </div>
+      <section class="report-section">
+        <h3>Generate Financial Report</h3>
+        <button
+          pButton
+          label="Generate Report"
+          (click)="generateReport()"
+        ></button>
+        <div *ngIf="report" class="report-summary">
+          <h4>Report Summary</h4>
+          <pre>{{ report | json }}</pre>
+        </div>
+      </section>
     </div>
   </div>
-
-  <section>
-    <h3>Generate Financial Report</h3>
-    <button pButton label="Generate Report" (click)="generateReport()"></button>
-    <div *ngIf="report">
-      <h4>Report Summary</h4>
-      <pre>{{ report | json }}</pre>
-    </div>
-  </section>
 </div>
